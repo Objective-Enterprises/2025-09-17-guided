@@ -18,7 +18,9 @@ input, button, select {
 button {
   cursor: pointer;
 }
-
+.complete {
+  text-decoration: line-through;
+}
 
 table, tr, td {
   border: 1px solid black;
