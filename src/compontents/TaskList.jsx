@@ -29,12 +29,18 @@ export default function TaskList(props) {
     const statusButton = task.complete
       ? <button onClick={handleUndo}>Undo</button>
       : <button onClick={handleComplete}>Complete</button>
+    function handleDelete () {
+      const newTasks = props.tasks.filter((task, taskIndex) => {
+        return taskIndex !== index
+      })
+      props.setTasks(newTasks)
+    }
     return (
       <tr key={index}>
         <td className={nameClass}>{task.name}</td>
         <td>{task.category}</td>
         <td>{statusButton}</td>
-        <td><button></button></td>
+        <td><button onClick={handleDelete}>Delete</button></td>
       </tr>
     )
   })
