@@ -2,7 +2,13 @@ import { useState } from 'react'
 import TaskForm from './TaskForm'
 
 export default function TaskList(props) {
-  const rows = props.tasks.map((task, index) => {
+  const filtered = props.tasks.filter(task => {
+    if (props.selection === '') {
+      return true
+    }
+    return task.category === props.selection
+  })
+  const rows = filtered.map((task, index) => {
     function handleComplete () {
       const newTasks = props.tasks.map((task, taskIndex) => {
         const target = index === taskIndex
@@ -25,7 +31,7 @@ export default function TaskList(props) {
       })
       props.setTasks(newTasks)
     }
-    const nameClass = task.complete && 'complete'
+    const nameClass = task.complete ? 'complete' : undefined
     const statusButton = task.complete
       ? <button onClick={handleUndo}>Undo</button>
       : <button onClick={handleComplete}>Complete</button>
